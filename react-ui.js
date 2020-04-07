@@ -1,7 +1,12 @@
 function List(props) {
   return (
     <ul>
-      <li>List</li>
+      {props.items.map((item) => (
+        <li key={item.id}>
+          <span>{item.name}</span>
+          <button onClick={() => props.remove(item)}>X</button>
+        </li>
+      ))}
     </ul>
   )
 }
@@ -21,6 +26,10 @@ class Todos extends React.Component {
     )
   }
 
+  removeItem = (todo) => {
+    this.props.store.dispatch(removeTodoAction(todo.id))
+  }
+
   render() {
     return (
       <div>
@@ -31,7 +40,7 @@ class Todos extends React.Component {
           ref={(input) => (this.input = input)}
         />
         <button onClick={this.addItem}>Add Todo</button>
-        <List />
+        <List items={this.props.todos} remove={this.removeItem} />
       </div>
     )
   }
@@ -51,6 +60,10 @@ class Goals extends React.Component {
     )
   }
 
+  removeItem = (goal) => {
+    this.props.store.dispatch(removeGoalAction(goal.id))
+  }
+
   render() {
     return (
       <div>
@@ -61,7 +74,7 @@ class Goals extends React.Component {
           ref={(input) => (this.input = input)}
         />
         <button onClick={this.addItem}>Add Goal</button>
-        <List />
+        <List items={this.props.goals} remove={this.removeItem} />
       </div>
     )
   }
