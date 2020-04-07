@@ -1,3 +1,5 @@
+This branch already uses Redux, to see it from scratch go to the master branch.
+
 # Todo list with reducers
 A very simple todo list make to learn Redux concepts of reducers, implementing it from scratch.
 
