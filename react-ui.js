@@ -3,7 +3,12 @@ function List(props) {
     <ul>
       {props.items.map((item) => (
         <li key={item.id}>
-          <span>{item.name}</span>
+          <span
+            onClick={() => props.toggle && props.toggle(item.id)}
+            style={{ textDecoration: item.complete ? 'line-through' : 'none' }}
+          >
+            {item.name}
+          </span>
           <button onClick={() => props.remove(item)}>X</button>
         </li>
       ))}
@@ -30,6 +35,10 @@ class Todos extends React.Component {
     this.props.store.dispatch(removeTodoAction(todo.id))
   }
 
+  toggleItem = (id) => {
+    this.props.store.dispatch(toggleTodoAction(id))
+  }
+
   render() {
     return (
       <div>
@@ -40,7 +49,11 @@ class Todos extends React.Component {
           ref={(input) => (this.input = input)}
         />
         <button onClick={this.addItem}>Add Todo</button>
-        <List items={this.props.todos} remove={this.removeItem} />
+        <List
+          toggle={this.toggleItem}
+          items={this.props.todos}
+          remove={this.removeItem}
+        />
       </div>
     )
   }
