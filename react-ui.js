@@ -32,7 +32,7 @@ class Todos extends React.Component {
   }
 
   removeItem = (todo) => {
-    this.props.store.dispath(removeTodoAction(todo.id))
+    this.props.store.dispatch(removeTodoAction(todo.id))
     return API.deleteTodo(todo.id).catch(() => {
       this.props.store.dispatch(addTodoAction(todo))
       alert('An error occurred. Try again.')
