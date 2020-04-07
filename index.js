@@ -67,6 +67,30 @@ function handleDeleteTodo(todo) {
   }
 }
 
+function handleAddGoal(name, callback) {
+  return (dispatch) => {
+    return API.saveGoal(name)
+      .then((goal) => {
+        dispatch(addGoalAction(goal))
+        callback()
+      })
+      .catch(() => {
+        alert('There was an error. Try again.')
+      })
+  }
+}
+
+function handleDeleteGoal(goal) {
+  return (dispatch) => {
+    dispatch(removeGoalAction(goal.id))
+
+    return API.deleteGoal(goal.id).catch(() => {
+      dispatch(addGoalAction(goal))
+      alert('An error occurred. Try again.')
+    })
+  }
+}
+
 // Reducers
 function todos(state = [], action) {
   switch (action.type) {
