@@ -56,6 +56,17 @@ function receiveDataAction(todos, goals) {
   }
 }
 
+function handleDeleteTodo(todo) {
+  return (dispatch) => {
+    dispatch(removeTodoAction(todo.id))
+
+    return API.deleteTodo(todo.id).catch(() => {
+      this.props.store.dispatch(addTodoAction(todo))
+      alert('An error occurred. Try again.')
+    })
+  }
+}
+
 // Reducers
 function todos(state = [], action) {
   switch (action.type) {
@@ -131,5 +142,5 @@ const store = Redux.createStore(
     goals,
     loading,
   }),
-  Redux.applyMiddleware(checker, logger)
+  Redux.applyMiddleware(ReduxThunk.default, checker, logger)
 )
