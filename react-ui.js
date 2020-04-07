@@ -41,6 +41,10 @@ class Todos extends React.Component {
 
   toggleItem = (id) => {
     this.props.store.dispatch(toggleTodoAction(id))
+    return API.saveTodoToggle(id).catch(() => {
+      this.props.store.dispatch(toggleTodoAction(id))
+      alert('An error occurred. Try again.')
+    })
   }
 
   render() {
