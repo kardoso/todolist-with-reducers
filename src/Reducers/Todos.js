@@ -1,5 +1,5 @@
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from '../Actions/Todos'
-import { RECEIVE_DATA } from '../Actions/Shared'
+import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from '../actions/todos'
+import { RECEIVE_DATA } from '../actions/shared'
 
 export function todos(state = [], action) {
   switch (action.type) {
